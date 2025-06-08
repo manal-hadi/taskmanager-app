@@ -2,30 +2,7 @@
 <html lang="en">
     <head>
         <title>Task Manager</title>
-        <style>
-            .task-section {
-                margin: 20px 0;
-                padding: 15px;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-            }
-            .completed-task {
-                color: #28a745;
-            }
-            .tick-mark {
-                color: #28a745;
-                margin-right: 5px;
-            }
-            .task-list {
-                list-style-type: none;
-                padding-left: 0;
-            }
-            .task-item {
-                margin: 10px 0;
-                padding: 10px;
-                border-bottom: 1px solid #eee;
-            }
-        </style>
+        <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
     </head>
     <body>
         <h1>Add Task</h1>
