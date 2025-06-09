@@ -23,10 +23,14 @@
             <h2>To-Do Tasks</h2>
             <ul class="task-list">
                 {% for task in tasks if not task.completed %}
-                    <li class="task-item">
+                    <li class="task-item {% if task.created_at and task.created_at < now %}overdue{% endif %}">
                         <strong>{{ task.title }}</strong>
                         {% if task.description %}
                             - {{ task.description }}
+                        {% endif %}
+                        {% if task.created_at %}
+                            <br>
+                            <span class="deadline">Deadline: {{ task.created_at.strftime('%Y-%m-%d') }}</span>
                         {% endif %}
                         <br>
                         <a href="{{ url_for('edit_task', task_id=task.id) }}">Edit</a>

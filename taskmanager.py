@@ -22,7 +22,7 @@ with app.app_context():
 @app.route('/')
 def index():
     tasks = Task.query.all()
-    return render_template('index.html', tasks=tasks)
+    return render_template('index.html', tasks=tasks, now=datetime.utcnow())
 
 @app.route('/complete/<int:task_id>')
 def complete_task(task_id):
@@ -61,12 +61,22 @@ def edit_task(task_id):
     if request.method == 'POST':
         title = request.form.get('title')
         description = request.form.get('description')
+        deadline = request.form.get('deadline')
         if title:
             task.title = title
             task.description = description
+            # Store deadline in created_at if you want to use it, since model has no deadline field
+            if deadline:
+                try:
+                    from datetime import datetime
+                    task.created_at = datetime.strptime(deadline, '%Y-%m-%d')
+                except Exception:
+                    pass  # Ignore invalid date
             db.session.commit()
             return redirect(url_for('index'))
-    return render_template('edit_task.html', task=task)
+    # For GET, render the edit form with current values, including deadline as date string
+    deadline_str = task.created_at.strftime('%Y-%m-%d') if task.created_at else ''
+    return render_template('edit_task.html', task=task, deadline=deadline_str)
 
 @app.route('/delete/<int:task_id>')
 def delete_task(task_id):

@@ -166,3 +166,33 @@ a:hover {
         padding: 1rem;
     }
 }
+/* Deadline Task Styles */
+.deadline-task {
+    background-color: #fff3e0;
+    color: #e65100;
+    border-left: 4px solid #ff9800;
+    transition: all 0.3s ease;
+}
+
+.deadline-task:hover {
+    background-color: #ffe0b2;
+}
+
+.deadline-task strong {
+    color: #bf360c;
+}
+
+.deadline-task .clock-icon {
+    color: #ff9800;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.deadline-task a {
+    color: #e65100;
+}
+
+.deadline-task a:hover {
+    background-color: #ffcc80;
+    color: #bf360c;
+}
